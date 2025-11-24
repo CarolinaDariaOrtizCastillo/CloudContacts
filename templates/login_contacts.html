@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso Restringido</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-[#6f6fcf] p-4">
+
+    <!-- Tarjeta -->
+    <div class="bg-white w-full max-w-sm p-8 mx-4 rounded-3xl shadow-xl relative">
+
+        <h2 class="text-center text-2xl font-bold text-gray-800 mb-6">
+            Inserta el usuario correcto para acceder a la lista de contactos registrados
+        </h2>
+
+        <form id="loginContactsForm" class="space-y-5">
+
+            <!-- Correo -->
+            <div>
+                <label class="text-sm text-gray-700 font-medium">Correo autorizado</label>
+                <div class="flex items-center mt-1 bg-gray-100 px-3 py-2 rounded-xl">
+                    <span class="text-gray-400 mr-2">✉️</span>
+                    <input type="email" id="auth_email" required
+                        class="w-full bg-transparent outline-none text-gray-700">
+                </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div>
+                <label class="text-sm text-gray-700 font-medium">Contraseña</label>
+                <div class="flex items-center mt-1 bg-gray-100 px-3 py-2 rounded-xl">
+                    <span class="text-gray-400 mr-2">🔒</span>
+                    <input type="password" id="auth_password" required
+                        class="w-full bg-transparent outline-none text-gray-700">
+                </div>
+            </div>
+
+            <!-- Botón -->
+            <button type="submit"
+                class="w-full mt-4 bg-[#7367F0] text-white font-bold py-3 rounded-xl shadow-md hover:bg-[#5b53c4] transition">
+                ACCEDER →
+            </button>
+
+        </form>
+
+        <p id="login_msg" class="mt-4 text-center text-red-500 font-medium"></p>
+
+    </div>
+
+    <script>
+        document.getElementById("loginContactsForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("auth_email").value;
+            const password = document.getElementById("auth_password").value;
+            const msg = document.getElementById("login_msg");
+
+            const res = await fetch("/auth-contacts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+
+            if (data.allowed) {
+                localStorage.setItem("contacts_auth", "allowed");
+                window.location.href = "/contacts-real";
+            } else {
+                msg.textContent = "Credenciales incorrectas. No tienes acceso.";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

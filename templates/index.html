@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CloudContacts - Registro</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-[#6f6fcf] p-4">
+
+    <!-- Tarjeta -->
+    <div class="bg-white w-full max-w-sm p-8 mx-4 rounded-3xl shadow-xl relative">
+
+        <h2 class="text-center text-2xl font-bold text-gray-800 mb-6">¡Registra tu contacto aquí!</h2>
+
+        <form id="contactForm" class="space-y-5">
+
+            <!-- Nombre -->
+            <div>
+                <label class="text-sm text-gray-700 font-medium">Nombre completo</label>
+                <div class="flex items-center mt-1 bg-gray-100 px-3 py-2 rounded-xl">
+                    <span class="text-gray-400 mr-2">👤</span>
+                    <input type="text" id="name" required class="w-full bg-transparent outline-none text-gray-700">
+                </div>
+            </div>
+
+            <!-- Correo -->
+            <div>
+                <label class="text-sm text-gray-700 font-medium">Correo electrónico</label>
+                <div class="flex items-center mt-1 bg-gray-100 px-3 py-2 rounded-xl">
+                    <span class="text-gray-400 mr-2">✉️</span>
+                    <input type="email" id="email" required class="w-full bg-transparent outline-none text-gray-700">
+                </div>
+            </div>
+
+            <!-- Teléfono -->
+            <div>
+                <label class="text-sm text-gray-700 font-medium">Teléfono (opcional)</label>
+                <div class="flex items-center mt-1 bg-gray-100 px-3 py-2 rounded-xl">
+                    <span class="text-gray-400 mr-2">📞</span>
+                    <input type="text" id="phone" class="w-full bg-transparent outline-none text-gray-700">
+                </div>
+            </div>
+
+            <!-- Botón -->
+            <button type="submit"
+                class="w-full mt-4 bg-[#7367F0] text-white font-bold py-3 rounded-xl shadow-md hover:bg-[#5b53c4] transition">
+                GUARDAR →
+            </button>
+
+        </form>
+
+        <p id="msg" class="mt-4 text-center font-medium text-gray-700"></p>
+
+        <div class="text-center mt-3">
+            <a href="/contacts" class="text-[#7367F0] font-medium hover:underline">
+                Ver Lista de Contactos
+            </a>
+        </div>
+
+    </div>
+
+    <script src="/static/js/validate.js"></script>
+
+</body>
+
+</html>
